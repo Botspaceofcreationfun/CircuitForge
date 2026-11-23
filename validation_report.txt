@@ -1,0 +1,45 @@
+==============================================================================
+1. RC validation against V(t) = Vf + (Vi - Vf)*exp(-t/(R*C))
+   R = 1 kOhm, C = 1 uF, tau = 1 ms, tstop = 8 ms
+  RC charging   [be]          max|err|=9.159e-03 Vconverged     steps=800                   
+  RC charging   [trap]        max|err|=2.459e-04 Vconverged     steps=800                   
+  RC discharging [be]         max|err|=9.159e-03 Vconverged     steps=800                   
+  RC discharging [trap]       max|err|=2.459e-04 Vconverged     steps=800                   
+
+==============================================================================
+2. Numerical error vs time step (RC discharge, evaluated at t = tau)
+  dt (s)                      BE err (V)    trap err (V)  ratio BE      ratio trap    
+  5.000e-05                   4.505e-02     1.862e-03                                 
+  2.500e-05                   2.276e-02     4.721e-04                                 
+  1.250e-05                   1.144e-02     1.189e-04                                 
+  6.250e-06                   5.733e-03     2.983e-05                                 
+  3.125e-06                   2.870e-03     7.471e-06                                 
+  error ratios (previous/next dt)              
+    backward Euler (expect ~2, first order)['1.98', '1.99', '1.99', '2.00']
+    trapezoidal  (expect ~4, second order)['3.94', '3.97', '3.99', '3.99']
+
+==============================================================================
+3. RL step response (R=1k, L=10mH, tau_L=10 us, dt=100 ns)
+  quantity                    max|err|      relative                                  
+  i(L1) vs (Vs/R)(1-exp(-t*R/L))2.459e-07 A                 
+  v(L1) vs Vs*exp(-t*R/L)     2.459e-04 V                 
+
+==============================================================================
+4. Series RLC step response vs analytical (L=1mH, C=1uF)
+  RLC underdamped (R=10)      max|err|=2.496e-05 Vconverged                                 
+  RLC critical    (R=63.2456) max|err|=2.474e-05 Vconverged                                 
+  RLC overdamped  (R=200)     max|err|=2.418e-05 Vconverged                                 
+
+==============================================================================
+5. Resistive networks vs independent nodal-analysis reference
+    chain seed=0                R in [100, 5000] ohm, 6 nodes                                          
+    chain seed=1                R in [100, 5000] ohm, 6 nodes                                          
+    chain seed=2                R in [100, 5000] ohm, 6 nodes                                          
+    chain seed=3                R in [100, 5000] ohm, 6 nodes                                          
+    chain seed=4                R in [100, 5000] ohm, 6 nodes                                          
+  worst node-voltage deviation across 5 networks0.000e+00 V                                             
+
+==============================================================================
+6. Diode DC bias vs bisection reference (Is=1e-14, N=1)
+  vd(D1) solver / reference / deviation0.692543627   0.692543633   5.69e-09 V    iters=12      
+==============================================================================
