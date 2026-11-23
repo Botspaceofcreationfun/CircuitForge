@@ -1,0 +1,10 @@
+# Series RLC, underdamped step response.
+# R = 10 ohm, L = 1 mH, C = 1 uF  ->  omega0 = 1/sqrt(LC) = 31623 rad/s,
+# alpha = R/(2L) = 5000 1/s  <  omega0  ->  underdamped.
+V1 1 0 STEP(0 5 0)
+R1 1 2 10
+L1 2 3 1e-3
+C1 3 0 1e-6
+.tran dt=1e-7 tstop=2e-3 method=trap
+.plot v(3) i(L1)
+.export rlc_underdamped.csv

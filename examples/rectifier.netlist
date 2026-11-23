@@ -1,0 +1,10 @@
+# Half-wave rectifier: 10 V sine-like pulse train through a diode
+# into RC load (R=1k, C=10 uF).  Demonstrates the nonlinear transient path.
+V1 1 0 PULSE(-10 10 0 1e-4 1e-4 4e-4 1e-3)
+R1 1 2 100
+D1 2 3
+R2 3 0 1000
+C1 3 0 10e-6
+.tran dt=1e-6 tstop=8e-3 method=trap
+.plot v(3) i(D1)
+.export rectifier.csv

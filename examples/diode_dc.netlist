@@ -1,0 +1,7 @@
+# Diode DC bias: 5 V through 1k into a silicon-like diode.
+# Diode model IS=1e-14, N=1.0; expect Vd ~ 0.65-0.7 V.
+V1 1 0 DC(5)
+R1 1 2 1000
+D1 2 0
+.model D IS=1e-14 N=1.0
+.op

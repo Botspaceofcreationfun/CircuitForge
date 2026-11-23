@@ -1,0 +1,8 @@
+# RC charging: 5 V step through 1k into 1 uF.
+# V_C(t) = 5*(1 - exp(-t/(R*C))), tau = 1 ms.
+V1 1 0 STEP(0 5 0)
+R1 1 2 1000
+C1 2 0 1e-6
+.tran dt=1e-5 tstop=8e-3 method=trap
+.plot v(2) i(R1)
+.export rc_charge.csv

@@ -1,0 +1,7 @@
+# RC discharging: capacitor pre-charged to 5 V through 1k.
+# V_C(t) = 5*exp(-t/(R*C)), tau = 1 ms.
+C1 1 0 1e-6 5
+R1 1 0 1000
+.tran dt=1e-5 tstop=8e-3 method=be
+.plot v(1) i(R1)
+.export rc_discharge.csv

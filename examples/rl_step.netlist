@@ -1,0 +1,8 @@
+# RL step response: 5 V step, R = 1k, L = 10 mH.
+# i_L(t) = (5/R)*(1 - exp(-t*R/L)), tau_L = L/R = 10 us.
+V1 1 0 STEP(0 5 0)
+R1 1 2 1000
+L1 2 0 10e-3
+.tran dt=1e-7 tstop=8e-5 method=trap
+.plot v(2) i(L1)
+.export rl_step.csv

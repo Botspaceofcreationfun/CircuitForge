@@ -1,0 +1,7 @@
+# Deliberately broken netlist: node 3 is floating (it is only connected
+# through a current source, which does not define a voltage).
+# Run it to see the floating-node diagnostic in action.
+I1 0 3 1e-3
+R1 1 2 1000
+V1 1 0 DC(5)
+.op
